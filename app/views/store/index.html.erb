@@ -1,0 +1,19 @@
+<h1>Store#index</h1>
+<p>Find me in app/views/store/index.html.erb</p>
+     <% if notice %>
+         <%= notice %>
+
+<% end %>
+           Your Pragmatic Catalog
+
+<% @products.each do |product| %>
+
+<%= image_tag(product.image_url) %>
+
+<%= product.title %>
+<%= button_to 'Add to Cart', line_items_path(:product_id => product) %>
+
+
+<%= sanitize(product.description) %>
+<%= product.price %>
+<% end %>
