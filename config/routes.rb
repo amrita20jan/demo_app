@@ -9,19 +9,15 @@ DemoApp::Application.routes.draw do
   #get "sessions/new"
   #get "sessions/create"
   #get "sessions/destroy"
-  resources :users
+  scope '(:locale)' do
 
-  resources :orders
-
-  resources :line_items
-
-  resources :carts
-
-  get "store/index"
-
-   resources :products do
-get :who_bought, :on => :member
-end
+      resources :users
+      resources :orders
+      resources :line_items
+      resources :carts
+      resources :products do
+         get :who_bought, :on => :member
+  end
 
 
   resources :products
@@ -33,9 +29,17 @@ end
 
   # You can have the root of your site routed with "root"
   #root 'welcome#index'
+  # root :to => 'store#index', :as => 'store'
+
+  get "store/index"
+  resources :products do
+    get :who_bought, :on => :member
+  end
+
+  resources :products
   root :to => 'store#index', :as => 'store'
-
-
+ end
+end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -85,4 +89,6 @@ end
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-end
+   
+
+                                                         #get "store/index"
